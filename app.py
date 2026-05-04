@@ -42,132 +42,78 @@ brand_model_dict = {
     "Lainnya": ["Lainnya"]
 }
 
-# 2. Kamus Daftar Tahun Produksi Spesifik per Model (Dibuat urut dari terbaru ke terlama)
 # 2. Kamus Daftar Tahun Produksi Spesifik per Model 
 model_years_dict = {
-    # TOYOTA
-    "Camry": list(range(2024, 1990, -1)),
-    "Corolla": list(range(2024, 1990, -1)),
-    "RAV4": list(range(2024, 1996, -1)),
-    "Highlander": list(range(2024, 2001, -1)),
-    "Tacoma": list(range(2024, 1995, -1)),
-    "Tundra": list(range(2024, 2000, -1)),
-    "Sienna": list(range(2024, 1998, -1)),
-    "Prius": list(range(2024, 2001, -1)),
-    "Yaris": list(range(2020, 2007, -1)),
-    "4Runner": list(range(2024, 1990, -1)),
-
-    # FORD
-    "F-150": list(range(2024, 1990, -1)),
-    "Mustang": list(range(2024, 1990, -1)),
-    "Explorer": list(range(2024, 1991, -1)),
-    "Escape": list(range(2024, 2001, -1)),
-    "Focus": list(range(2018, 2000, -1)),
-    "Fusion": list(range(2020, 2006, -1)),
-    "Ranger": list(range(2024, 1990, -1)),
-    "Edge": list(range(2024, 2007, -1)),
+    "Camry": list(range(2024, 1990, -1)), "Corolla": list(range(2024, 1990, -1)),
+    "RAV4": list(range(2024, 1996, -1)), "Highlander": list(range(2024, 2001, -1)),
+    "Tacoma": list(range(2024, 1995, -1)), "Tundra": list(range(2024, 2000, -1)),
+    "Sienna": list(range(2024, 1998, -1)), "Prius": list(range(2024, 2001, -1)),
+    "Yaris": list(range(2020, 2007, -1)), "4Runner": list(range(2024, 1990, -1)),
+    
+    "F-150": list(range(2024, 1990, -1)), "Mustang": list(range(2024, 1990, -1)),
+    "Explorer": list(range(2024, 1991, -1)), "Escape": list(range(2024, 2001, -1)),
+    "Focus": list(range(2018, 2000, -1)), "Fusion": list(range(2020, 2006, -1)),
+    "Ranger": list(range(2024, 1990, -1)), "Edge": list(range(2024, 2007, -1)),
     "Expedition": list(range(2024, 1997, -1)),
 
-    # CHEVROLET
-    "Silverado 1500": list(range(2024, 1999, -1)),
-    "Equinox": list(range(2024, 2005, -1)),
-    "Malibu": list(range(2024, 1997, -1)),
-    "Tahoe": list(range(2024, 1995, -1)),
-    "Cruze": list(range(2019, 2011, -1)),
-    "Camaro": list(range(2024, 2010, -1)),
-    "Colorado": list(range(2024, 2004, -1)),
-    "Traverse": list(range(2024, 2009, -1)),
+    "Silverado 1500": list(range(2024, 1999, -1)), "Equinox": list(range(2024, 2005, -1)),
+    "Malibu": list(range(2024, 1997, -1)), "Tahoe": list(range(2024, 1995, -1)),
+    "Cruze": list(range(2019, 2011, -1)), "Camaro": list(range(2024, 2010, -1)),
+    "Colorado": list(range(2024, 2004, -1)), "Traverse": list(range(2024, 2009, -1)),
     "Impala": list(range(2020, 1994, -1)),
 
-    # BMW
-    "3 Series": list(range(2024, 1990, -1)),
-    "5 Series": list(range(2024, 1990, -1)),
-    "X3": list(range(2024, 2004, -1)),
-    "X5": list(range(2024, 2000, -1)),
-    "M3": list(range(2024, 1990, -1)),
-    "M4": list(range(2024, 2015, -1)),
-    "4 Series": list(range(2024, 2014, -1)),
-    "7 Series": list(range(2024, 1990, -1)),
+    "3 Series": list(range(2024, 1990, -1)), "5 Series": list(range(2024, 1990, -1)),
+    "X3": list(range(2024, 2004, -1)), "X5": list(range(2024, 2000, -1)),
+    "M3": list(range(2024, 1990, -1)), "M4": list(range(2024, 2015, -1)),
+    "4 Series": list(range(2024, 2014, -1)), "7 Series": list(range(2024, 1990, -1)),
     "X1": list(range(2024, 2013, -1)),
 
-    # MERCEDES-BENZ
-    "C-Class": list(range(2024, 1994, -1)),
-    "E-Class": list(range(2024, 1990, -1)),
-    "S-Class": list(range(2024, 1990, -1)),
-    "GLC": list(range(2024, 2016, -1)),
-    "GLE": list(range(2024, 2016, -1)),
-    "A-Class": list(range(2022, 2019, -1)),
+    "C-Class": list(range(2024, 1994, -1)), "E-Class": list(range(2024, 1990, -1)),
+    "S-Class": list(range(2024, 1990, -1)), "GLC": list(range(2024, 2016, -1)),
+    "GLE": list(range(2024, 2016, -1)), "A-Class": list(range(2022, 2019, -1)),
     "GLA": list(range(2024, 2015, -1)),
 
-    # HONDA
-    "Civic": list(range(2024, 1990, -1)),
-    "Accord": list(range(2024, 1990, -1)),
-    "CR-V": list(range(2024, 1997, -1)),
-    "Pilot": list(range(2024, 2003, -1)),
-    "Odyssey": list(range(2024, 1995, -1)),
-    "HR-V": list(range(2024, 2016, -1)),
-    "Fit": list(range(2020, 2007, -1)),
-    "Ridgeline": list(range(2024, 2006, -1)),
+    "Civic": list(range(2024, 1990, -1)), "Accord": list(range(2024, 1990, -1)),
+    "CR-V": list(range(2024, 1997, -1)), "Pilot": list(range(2024, 2003, -1)),
+    "Odyssey": list(range(2024, 1995, -1)), "HR-V": list(range(2024, 2016, -1)),
+    "Fit": list(range(2020, 2007, -1)), "Ridgeline": list(range(2024, 2006, -1)),
 
-    # NISSAN
-    "Altima": list(range(2024, 1993, -1)),
-    "Sentra": list(range(2024, 1990, -1)),
-    "Rogue": list(range(2024, 2008, -1)),
-    "Maxima": list(range(2023, 1990, -1)),
-    "Pathfinder": list(range(2024, 1990, -1)),
-    "Murano": list(range(2024, 2003, -1)),
-    "Frontier": list(range(2024, 1998, -1)),
-    "Titan": list(range(2024, 2004, -1))
+    "Altima": list(range(2024, 1993, -1)), "Sentra": list(range(2024, 1990, -1)),
+    "Rogue": list(range(2024, 2008, -1)), "Maxima": list(range(2023, 1990, -1)),
+    "Pathfinder": list(range(2024, 1990, -1)), "Murano": list(range(2024, 2003, -1)),
+    "Frontier": list(range(2024, 1998, -1)), "Titan": list(range(2024, 2004, -1))
 }
 
 # 3. Kamus Bahan Bakar Spesifik per Model
-# 3. Kamus Bahan Bakar Spesifik per Model
 model_fuel_dict = {
-    # Mobil yang Pasti Hybrid
-    "Prius": ["Hybrid"],
-    
-    # Mobil Sport yang cuma ada Bensin
-    "Mustang": ["Gasoline"],
-    "Camaro": ["Gasoline"],
-    "M3": ["Gasoline"],
-    "M4": ["Gasoline"],
-    
-    # Truk/SUV Besar yang punya opsi Diesel / Flex Fuel
+    "Prius": ["Hybrid"], "Mustang": ["Gasoline"], "Camaro": ["Gasoline"],
+    "M3": ["Gasoline"], "M4": ["Gasoline"],
     "F-150": ["Gasoline", "E85 Flex Fuel", "Hybrid", "Diesel"],
     "Silverado 1500": ["Gasoline", "Diesel", "E85 Flex Fuel"],
     "Tahoe": ["Gasoline", "E85 Flex Fuel", "Diesel"],
     "Colorado": ["Gasoline", "Diesel"],
     "X5": ["Gasoline", "Diesel", "Hybrid"],
-    
-    # Mobil Umum yang ada opsi Hybrid
-    "Camry": ["Gasoline", "Hybrid"],
-    "Corolla": ["Gasoline", "Hybrid"],
-    "RAV4": ["Gasoline", "Hybrid"],
-    "Highlander": ["Gasoline", "Hybrid"],
-    "Accord": ["Gasoline", "Hybrid"],
-    "CR-V": ["Gasoline", "Hybrid"],
-    "Escape": ["Gasoline", "Hybrid"],
-    "Explorer": ["Gasoline", "Hybrid"]
+    "Camry": ["Gasoline", "Hybrid"], "Corolla": ["Gasoline", "Hybrid"],
+    "RAV4": ["Gasoline", "Hybrid"], "Highlander": ["Gasoline", "Hybrid"],
+    "Accord": ["Gasoline", "Hybrid"], "CR-V": ["Gasoline", "Hybrid"],
+    "Escape": ["Gasoline", "Hybrid"], "Explorer": ["Gasoline", "Hybrid"]
 }
 
 brand = st.sidebar.selectbox("Merek", list(brand_model_dict.keys()))
 
-# ==========================================
 # LOGIKA DROPDOWN BERUNTUN (CASCADING)
-# ==========================================
 if brand == "Lainnya":
     car_model = st.sidebar.text_input("Ketik Nama Merek & Model (Cth: Kia Stinger GT):", "Kia Stinger GT")
-    # Tampilkan semua tahun (2024 sampai 1990) dan semua jenis bahan bakar
     available_years = list(range(2024, 1989, -1))
     available_fuels = ["Gasoline", "Hybrid", "E85 Flex Fuel", "Diesel", "Lainnya"]
 else:
     car_model = st.sidebar.selectbox("Nama Model", brand_model_dict[brand])
-    # Ambil list tahun, kalau mobil tidak ditulis di kamus, tampilkan default (2024-1990)
+    # Mengambil data tahun dari kamus berdasarkan model mobil
     available_years = model_years_dict.get(car_model, list(range(2024, 1989, -1)))
-    # Ambil list bahan bakar, kalau mobil tidak ditulis di kamus, tampilkan default
+    # Mengambil data bahan bakar dari kamus
     available_fuels = model_fuel_dict.get(car_model, ["Gasoline", "Hybrid", "E85 Flex Fuel", "Diesel", "Lainnya"])
 
-# Menampilkan Dropdown Tahun dan Bahan Bakar yang sudah disesuaikan dengan Modelnya!
+# EKSEKUSI DROPDOWN TAHUN & BAHAN BAKAR
 year = st.sidebar.selectbox("Tahun Rilis", available_years)
 fuel = st.sidebar.selectbox("Tipe Bahan Bakar", available_fuels)
 

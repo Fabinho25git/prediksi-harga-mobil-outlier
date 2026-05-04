@@ -27,22 +27,45 @@ try:
     
     st.success("✅ Semua file model BERHASIL dibaca! Mesin siap digunakan.")
     
-    # --- UI SIDEBAR ---
-    st.sidebar.header("🔧 Spesifikasi Kendaraan")
-    brand = st.sidebar.selectbox("Merek", ["Toyota", "Ford", "Chevrolet", "BMW", "Mercedes-Benz", "Honda", "Nissan", "Lainnya"])
-    car_model = st.sidebar.text_input("Nama Model (Cth: F-150, Civic, Mustang)", "Civic")
-    year = st.sidebar.slider("Tahun Rilis", 1990, 2024, 2018)
-    milage = st.sidebar.number_input("Jarak Tempuh (Mil)", min_value=0, value=50000, step=1000)
-    fuel = st.sidebar.selectbox("Tipe Bahan Bakar", ["Gasoline", "Hybrid", "E85 Flex Fuel", "Diesel", "Lainnya"])
+   # ==========================================
+# 3. SIDEBAR (INPUT PENGGUNA)
+# ==========================================
+st.sidebar.header("🔧 Spesifikasi Kendaraan")
 
-    st.sidebar.markdown("---")
-    st.sidebar.markdown("**Riwayat & Mesin**")
-    accident = st.sidebar.radio("Riwayat Kecelakaan?", ["Tidak Ada / Tidak Dilaporkan", "Pernah Kecelakaan"])
-    clean_title = st.sidebar.radio("Surat Kendaraan Bersih (Clean Title)?", ["Ya", "Tidak"])
+# A. Buat Kamus (Dictionary) Merek dan Model Mobilnya
+brand_model_dict = {
+    "Toyota": ["Camry", "Corolla", "RAV4", "Highlander", "Tacoma", "Tundra", "Sienna", "Prius", "Yaris", "4Runner"],
+    "Ford": ["F-150", "Mustang", "Explorer", "Escape", "Focus", "Fusion", "Ranger", "Edge", "Expedition"],
+    "Chevrolet": ["Silverado 1500", "Equinox", "Malibu", "Tahoe", "Cruze", "Camaro", "Colorado", "Traverse", "Impala"],
+    "BMW": ["3 Series", "5 Series", "X3", "X5", "M3", "M4", "4 Series", "7 Series", "X1"],
+    "Mercedes-Benz": ["C-Class", "E-Class", "S-Class", "GLC", "GLE", "A-Class", "GLA"],
+    "Honda": ["Civic", "Accord", "CR-V", "Pilot", "Odyssey", "HR-V", "Fit", "Ridgeline"],
+    "Nissan": ["Altima", "Sentra", "Rogue", "Maxima", "Pathfinder", "Murano", "Frontier", "Titan"],
+    "Lainnya": ["Lainnya"]
+}
 
-    hp_input = st.sidebar.number_input("Horsepower (Kosongkan/0 jika tidak tahu)", min_value=0.0, value=0.0)
-    liter_input = st.sidebar.number_input("Kapasitas Mesin/Liter (Kosongkan/0 jika tidak tahu)", min_value=0.0, value=0.0)
+# B. Pilih Merek (Brand)
+brand = st.sidebar.selectbox("Merek", list(brand_model_dict.keys()))
 
+# C. Logika Pintar: Dropdown Model menyesuaikan Merek yang dipilih!
+if brand == "Lainnya":
+    # Jika pilih lainnya, kembalikan ke mode ketik manual
+    car_model = st.sidebar.text_input("Ketik Nama Merek & Model (Cth: Kia Stinger GT):", "Kia Stinger GT")
+else:
+    # Jika merek dikenali, munculkan pilihan modelnya
+    car_model = st.sidebar.selectbox("Nama Model", brand_model_dict[brand])
+
+year = st.sidebar.slider("Tahun Rilis", 1990, 2024, 2018)
+milage = st.sidebar.number_input("Jarak Tempuh (Mil)", min_value=0, value=50000, step=1000)
+fuel = st.sidebar.selectbox("Tipe Bahan Bakar", ["Gasoline", "Hybrid", "E85 Flex Fuel", "Diesel", "Lainnya"])
+
+st.sidebar.markdown("---")
+st.sidebar.markdown("**Riwayat & Mesin**")
+accident = st.sidebar.radio("Riwayat Kecelakaan?", ["Tidak Ada / Tidak Dilaporkan", "Pernah Kecelakaan"])
+clean_title = st.sidebar.radio("Surat Kendaraan Bersih (Clean Title)?", ["Ya", "Tidak"])
+
+hp_input = st.sidebar.number_input("Horsepower (Kosongkan/0 jika tidak tahu)", min_value=0.0, value=0.0)
+liter_input = st.sidebar.number_input("Kapasitas Mesin/Liter (Kosongkan/0 jika tidak tahu)", min_value=0.0, value=0.0)
     # --- LOGIKA PREDIKSI ---
     if st.button("HITUNG ESTIMASI HARGA", use_container_width=True):
         hp_final = hp_input if hp_input > 0 else median_hp

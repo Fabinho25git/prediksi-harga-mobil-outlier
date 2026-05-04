@@ -25,7 +25,6 @@ def load_files():
 
 model, model_columns, te_map, median_hp, median_liter = load_files()
 
-# ==========================================
 # 3. SIDEBAR (INPUT PENGGUNA)
 # ==========================================
 st.sidebar.header("🔧 Spesifikasi Kendaraan")
@@ -42,15 +41,36 @@ brand_model_dict = {
     "Lainnya": ["Lainnya"]
 }
 
+# Kamus Rentang Tahun Produksi: "Nama Model" -> (Tahun_Awal, Tahun_Akhir)
+# (Mobil yang tidak ditulis di sini otomatis akan diberi rentang standar 1990-2024)
+model_year_dict = {
+    "Yaris": (2007, 2020), 
+    "M4": (2015, 2024), 
+    "4 Series": (2014, 2024),
+    "GLC": (2016, 2024), 
+    "GLE": (2016, 2024), 
+    "A-Class": (2019, 2022), 
+    "GLA": (2015, 2024),
+    "HR-V": (2016, 2024), 
+    "Cruze": (2011, 2019), 
+    "Focus": (2000, 2018), 
+    "Fusion": (2006, 2020)
+}
+
 brand = st.sidebar.selectbox("Merek", list(brand_model_dict.keys()))
 
-# Logika Dinamis Dropdown
+# Logika Dinamis Dropdown Model & Slider Tahun
 if brand == "Lainnya":
     car_model = st.sidebar.text_input("Ketik Nama Merek & Model (Cth: Kia Stinger GT):", "Kia Stinger GT")
+    min_year, max_year = 1990, 2024
 else:
     car_model = st.sidebar.selectbox("Nama Model", brand_model_dict[brand])
+    # Ambil batas tahun dari model_year_dict, kalau tidak ada pakai 1990-2024
+    min_year, max_year = model_year_dict.get(car_model, (1990, 2024))
 
-year = st.sidebar.slider("Tahun Rilis", 1990, 2024, 2018)
+# Slider otomatis mengunci rentang tahun, dan posisi awal di tahun terbarunya
+year = st.sidebar.slider("Tahun Rilis", min_value=min_year, max_value=max_year, value=max_year)
+
 milage = st.sidebar.number_input("Jarak Tempuh (Mil)", min_value=0, value=50000, step=1000)
 fuel = st.sidebar.selectbox("Tipe Bahan Bakar", ["Gasoline", "Hybrid", "E85 Flex Fuel", "Diesel", "Lainnya"])
 

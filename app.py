@@ -25,11 +25,12 @@ def load_files():
 
 model, model_columns, te_map, median_hp, median_liter = load_files()
 
+# ==========================================
 # 3. SIDEBAR (INPUT PENGGUNA)
 # ==========================================
 st.sidebar.header("🔧 Spesifikasi Kendaraan")
 
-# Kamus Pintar Merek & Model
+# 1. Kamus Merek & Model
 brand_model_dict = {
     "Toyota": ["Camry", "Corolla", "RAV4", "Highlander", "Tacoma", "Tundra", "Sienna", "Prius", "Yaris", "4Runner"],
     "Ford": ["F-150", "Mustang", "Explorer", "Escape", "Focus", "Fusion", "Ranger", "Edge", "Expedition"],
@@ -41,38 +42,46 @@ brand_model_dict = {
     "Lainnya": ["Lainnya"]
 }
 
-# Kamus Rentang Tahun Produksi: "Nama Model" -> (Tahun_Awal, Tahun_Akhir)
-# (Mobil yang tidak ditulis di sini otomatis akan diberi rentang standar 1990-2024)
-model_year_dict = {
-    "Yaris": (2007, 2020), 
-    "M4": (2015, 2024), 
-    "4 Series": (2014, 2024),
-    "GLC": (2016, 2024), 
-    "GLE": (2016, 2024), 
-    "A-Class": (2019, 2022), 
-    "GLA": (2015, 2024),
-    "HR-V": (2016, 2024), 
-    "Cruze": (2011, 2019), 
-    "Focus": (2000, 2018), 
-    "Fusion": (2006, 2020)
+# 2. Kamus Daftar Tahun Produksi Spesifik per Model (Dibuat urut dari terbaru ke terlama)
+model_years_dict = {
+    "Yaris": [2020, 2019, 2018, 2017, 2016, 2015], 
+    "M4": [2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015], 
+    "Prius": [2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010],
+    "Focus": [2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010]
+    # Nanti kalian bisa tambahkan spesifikasi model lain di sini sesuai data The Outliers
+}
+
+# 3. Kamus Bahan Bakar Spesifik per Model
+model_fuel_dict = {
+    "Prius": ["Hybrid"], # Prius dikunci hanya bisa Hybrid
+    "Mustang": ["Gasoline"], # Mustang dikunci hanya Bensin
+    "F-150": ["Gasoline", "E85 Flex Fuel", "Hybrid"],
+    "Silverado 1500": ["Gasoline", "Diesel", "E85 Flex Fuel"],
+    "Camry": ["Gasoline", "Hybrid"]
 }
 
 brand = st.sidebar.selectbox("Merek", list(brand_model_dict.keys()))
 
-# Logika Dinamis Dropdown Model & Slider Tahun
+# ==========================================
+# LOGIKA DROPDOWN BERUNTUN (CASCADING)
+# ==========================================
 if brand == "Lainnya":
     car_model = st.sidebar.text_input("Ketik Nama Merek & Model (Cth: Kia Stinger GT):", "Kia Stinger GT")
-    min_year, max_year = 1990, 2024
+    # Tampilkan semua tahun (2024 sampai 1990) dan semua jenis bahan bakar
+    available_years = list(range(2024, 1989, -1))
+    available_fuels = ["Gasoline", "Hybrid", "E85 Flex Fuel", "Diesel", "Lainnya"]
 else:
     car_model = st.sidebar.selectbox("Nama Model", brand_model_dict[brand])
-    # Ambil batas tahun dari model_year_dict, kalau tidak ada pakai 1990-2024
-    min_year, max_year = model_year_dict.get(car_model, (1990, 2024))
+    # Ambil list tahun, kalau mobil tidak ditulis di kamus, tampilkan default (2024-1990)
+    available_years = model_years_dict.get(car_model, list(range(2024, 1989, -1)))
+    # Ambil list bahan bakar, kalau mobil tidak ditulis di kamus, tampilkan default
+    available_fuels = model_fuel_dict.get(car_model, ["Gasoline", "Hybrid", "E85 Flex Fuel", "Diesel", "Lainnya"])
 
-# Slider otomatis mengunci rentang tahun, dan posisi awal di tahun terbarunya
-year = st.sidebar.slider("Tahun Rilis", min_value=min_year, max_value=max_year, value=max_year)
+# Menampilkan Dropdown Tahun dan Bahan Bakar yang sudah disesuaikan dengan Modelnya!
+year = st.sidebar.selectbox("Tahun Rilis", available_years)
+fuel = st.sidebar.selectbox("Tipe Bahan Bakar", available_fuels)
 
 milage = st.sidebar.number_input("Jarak Tempuh (Mil)", min_value=0, value=50000, step=1000)
-fuel = st.sidebar.selectbox("Tipe Bahan Bakar", ["Gasoline", "Hybrid", "E85 Flex Fuel", "Diesel", "Lainnya"])
 
 st.sidebar.markdown("---")
 st.sidebar.markdown("**Riwayat & Mesin**")
@@ -81,7 +90,6 @@ clean_title = st.sidebar.radio("Surat Kendaraan Bersih (Clean Title)?", ["Ya", "
 
 hp_input = st.sidebar.number_input("Horsepower (Kosongkan/0 jika tidak tahu)", min_value=0.0, value=0.0)
 liter_input = st.sidebar.number_input("Kapasitas Mesin/Liter (Kosongkan/0 jika tidak tahu)", min_value=0.0, value=0.0)
-
 # ==========================================
 # 4. LOGIKA PREDIKSI (TOMBOL KLIK)
 # ==========================================
